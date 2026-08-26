@@ -1,6 +1,7 @@
 package com.bitarantech.toobazar.backend.database.controllers
 
-import com.bitarantech.toobazar.backend.database.entities.LocCityEntity
+import com.bitarantech.toobazar.backend.database.dto_response.LocCityResponse
+import com.bitarantech.toobazar.backend.database.dto_response.toResponse
 import com.bitarantech.toobazar.backend.database.services.LocCityService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -13,8 +14,6 @@ class LocCityController(
 ) {
 
     @GetMapping("loc_city")
-    fun getCities(): List<LocCityEntity> = service.findAll()
-
-
+    fun getCities(): List<LocCityResponse> = service.findAll().map { it.toResponse(false) }
 
 }

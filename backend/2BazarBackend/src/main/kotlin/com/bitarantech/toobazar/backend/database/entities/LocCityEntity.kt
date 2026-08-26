@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToMany
 
 @Entity(name = "city")
 data class LocCityEntity(
@@ -17,4 +18,7 @@ data class LocCityEntity(
     @ManyToOne()
     @JoinColumn(name = "province_id")
     val province: LocProvinceEntity,
+
+    @OneToMany(mappedBy = "city")
+    val neighborhood: List<LocNeighborhoodEntity> = listOf(),
 )
