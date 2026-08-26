@@ -1,8 +1,5 @@
-package com.bitarantech.toobazar.backend.database.entities.ads
+package com.bitarantech.toobazar.backend.database.entities
 
-import com.bitarantech.toobazar.backend.database.entities.image.ImageEntity
-import com.bitarantech.toobazar.backend.database.entities.user.UserEntity
-import com.bitarantech.toobazar.backend.database.entities.location.NeighborhoodEntity
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
@@ -25,7 +22,7 @@ data class AdsEntity(
 
     @ManyToOne()
     @JoinColumn(name = "neighborhood_id")
-    val location: NeighborhoodEntity,
+    val location: LocNeighborhoodEntity,
 
     @ManyToOne()
     @JoinColumn(name = "user_id")

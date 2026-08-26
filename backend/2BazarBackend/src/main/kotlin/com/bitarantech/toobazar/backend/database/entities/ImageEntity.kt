@@ -1,4 +1,4 @@
-package com.bitarantech.toobazar.backend.database.entities.image
+package com.bitarantech.toobazar.backend.database.entities
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
