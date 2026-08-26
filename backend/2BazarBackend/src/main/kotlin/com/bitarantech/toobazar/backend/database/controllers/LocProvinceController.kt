@@ -4,37 +4,27 @@ import com.bitarantech.toobazar.backend.database.entities.LocProvinceEntity
 import com.bitarantech.toobazar.backend.database.services.LocProvinceService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@RequestMapping("/api/v1/")
 class LocProvinceController(
-    val locProvinceService: LocProvinceService
+    val service: LocProvinceService
 ) {
 
-    @GetMapping("api/v1/loc_province")
-    fun getProvinces(): List<LocProvinceEntity> = locProvinceService.findAll()
+    @GetMapping("loc_province")
+    fun getProvinces(): List<LocProvinceEntity> = service.findAll()
 
-    @PostMapping("api/v1/loc_province")
+    @PostMapping("loc_province")
     fun addProvince(
         @RequestParam name: String?
     ): String {
         return if (name.isNullOrEmpty()) {
             "Invalid Name"
         } else {
-            locProvinceService.save(LocProvinceEntity(name = name))
-            "Saved Successfully"
-        }
-    }
-
-    @PostMapping("api/v1/loc_province")
-    fun addProvincesList(
-        @RequestParam name: String?
-    ): String {
-        return if (name.isNullOrEmpty()) {
-            "Invalid Name"
-        } else {
-            locProvinceService.save(LocProvinceEntity(name = name))
+            service.save(LocProvinceEntity(name = name))
             "Saved Successfully"
         }
     }

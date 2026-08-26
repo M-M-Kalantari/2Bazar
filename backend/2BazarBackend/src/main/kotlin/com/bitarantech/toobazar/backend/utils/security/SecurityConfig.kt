@@ -1,4 +1,4 @@
-package com.bitarantech.toobazar.backend.security
+package com.bitarantech.toobazar.backend.utils.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
