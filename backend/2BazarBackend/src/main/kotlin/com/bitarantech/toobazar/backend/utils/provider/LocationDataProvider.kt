@@ -4,6 +4,7 @@ import com.bitarantech.toobazar.backend.database.entities.LocCityEntity
 import com.bitarantech.toobazar.backend.database.entities.LocNeighborhoodEntity
 import com.bitarantech.toobazar.backend.database.entities.LocProvinceEntity
 
+
 data class ProvinceData(
     val name: String,
     val cities: List<CityData>

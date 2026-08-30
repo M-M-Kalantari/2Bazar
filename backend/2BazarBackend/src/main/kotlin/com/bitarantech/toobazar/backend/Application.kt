@@ -1,9 +1,11 @@
 package com.bitarantech.toobazar.backend
 
 import com.bitarantech.toobazar.backend.database.entities.LocProvinceEntity
+import com.bitarantech.toobazar.backend.database.services.CategoryService
 import com.bitarantech.toobazar.backend.database.services.LocCityService
 import com.bitarantech.toobazar.backend.database.services.LocNeighborhoodService
 import com.bitarantech.toobazar.backend.database.services.LocProvinceService
+import com.bitarantech.toobazar.backend.utils.provider.CategoryDataProvider
 import com.bitarantech.toobazar.backend.utils.provider.LocationDataProvider
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -15,6 +17,7 @@ class Application
 fun main(args: Array<String>) {
     val context = runApplication<Application>(*args)
     initLocations(context)
+    initCategories(context)
 }
 
 fun initLocations(context: ConfigurableApplicationContext) {
@@ -28,5 +31,15 @@ fun initLocations(context: ConfigurableApplicationContext) {
         provinceService.saveAll(tripleList.first)
         cityService.saveAll(tripleList.second)
         neighborhoodService.saveAll(tripleList.third)
+    }
+}
+
+fun initCategories(context: ConfigurableApplicationContext) {
+    val categoryService = context.getBean(CategoryService::class.java)
+
+    val list = CategoryDataProvider.getData()
+
+    if (categoryService.count() < 1){
+        categoryService.saveAll(list)
     }
 }

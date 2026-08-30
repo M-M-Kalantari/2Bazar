@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToMany
 
 @Entity(name = "category")
 data class CategoryEntity(
@@ -14,7 +15,12 @@ data class CategoryEntity(
 
     val name: String,
 
+    val icon: String = "",
+
     @ManyToOne()
     @JoinColumn(name = "parent_id", nullable = true)
-    val category: CategoryEntity?,
+    val parent: CategoryEntity? = null,
+
+    @OneToMany(mappedBy = "parent")
+    val children: List<CategoryEntity> = listOf(),
 )
