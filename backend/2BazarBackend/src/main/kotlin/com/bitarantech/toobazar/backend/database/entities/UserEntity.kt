@@ -6,8 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
-import org.springframework.data.annotation.CreatedDate
-import kotlin.time.Instant
+import java.time.Instant
 
 @Entity(name = "user")
 data class UserEntity(
