@@ -4,6 +4,10 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
+import org.springframework.data.annotation.CreatedDate
+import kotlin.time.Instant
 
 @Entity(name = "user")
 data class UserEntity(
@@ -15,4 +19,14 @@ data class UserEntity(
     val family: String,
 
     val phone: String,
+
+    val email: String,
+
+    val password: String,
+
+    @CreationTimestamp
+    val createdAt: Instant? = null,
+
+    @UpdateTimestamp
+    val updatedAt: Instant? = null,
 )
