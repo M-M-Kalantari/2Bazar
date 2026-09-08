@@ -4,6 +4,8 @@ import com.bitarantech.toobazar.backend.database.dto_response.LocProvinceRespons
 import com.bitarantech.toobazar.backend.database.dto_response.toResponse
 import com.bitarantech.toobazar.backend.database.entities.LocProvinceEntity
 import com.bitarantech.toobazar.backend.database.services.LocProvinceService
+import com.bitarantech.toobazar.backend.utils.error.ApiException
+import com.bitarantech.toobazar.backend.utils.error.Errors
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -20,7 +22,7 @@ class LocProvinceController(
         @RequestParam name: String?
     ): String {
         return if (name.isNullOrEmpty()) {
-            "Invalid Name"
+            throw ApiException(Errors.ERR_400_BAD_REQUEST.MISSING_REQUIRED_PARAMETER)
         } else {
             service.save(LocProvinceEntity(name = name))
             "Saved Successfully"

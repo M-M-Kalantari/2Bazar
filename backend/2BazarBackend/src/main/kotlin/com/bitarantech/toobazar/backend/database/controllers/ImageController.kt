@@ -1,6 +1,8 @@
 package com.bitarantech.toobazar.backend.database.controllers
 
 import com.bitarantech.toobazar.backend.database.services.ImageService
+import com.bitarantech.toobazar.backend.utils.error.ApiException
+import com.bitarantech.toobazar.backend.utils.error.Errors
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -20,7 +22,7 @@ class ImageController(
         file: MultipartFile? = null
     ): String{
         return if(file == null){
-            "File Not Found"
+            throw ApiException(Errors.ERR_400_BAD_REQUEST.MISSING_REQUIRED_PARAMETER)
         }else{
             val image = service.save(file)
             image.path
