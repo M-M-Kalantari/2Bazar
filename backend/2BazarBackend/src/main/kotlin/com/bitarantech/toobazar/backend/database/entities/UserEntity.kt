@@ -24,8 +24,8 @@ data class UserEntity(
     val password: String,
 
     @CreationTimestamp
-    val createdAt: Instant? = null,
+    val created_at: Instant? = null,
 
     @UpdateTimestamp
-    val updatedAt: Instant? = null,
+    val updated_at: Instant? = null,
 )

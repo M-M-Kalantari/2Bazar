@@ -12,13 +12,10 @@ class UserService(
     val repository: UserRepository
 ) {
 
-    fun findAll(): List<UserEntity> = repository.findAll()
+    fun hashPassword(password: String): String = BCryptPasswordEncoder().encode(password)!!
 
     fun save(entity: UserEntity): UserEntity {
         return repository.save(entity.copy(password = hashPassword(entity.password)))
     }
 
-    fun count(): Long = repository.count()
-
-    fun hashPassword(password: String): String = BCryptPasswordEncoder().encode(password)!!
 }
