@@ -45,11 +45,35 @@ class JwtService {
         return user.phone == phone && !isExpired(token)
     }
 
+//    fun extractPhone(token: String?): String? {
+//        if (token.isNullOrEmpty()) return null
+//        return try {
+//            getAllClaims(token.replace("Bearer ", "")).subject
+//        } catch (e: Exception) {
+//            null
+//        }
+//    }
+
     fun extractPhone(token: String?): String? {
-        if (token.isNullOrEmpty()) return null
+        if (token.isNullOrEmpty()) {
+            println("TOKEN IS NULL OR EMPTY")
+            return null
+        }
+
         return try {
-            getAllClaims(token.replace("Bearer ", "")).subject
+            val cleanToken = token.replace("Bearer ", "")
+            println("TOKEN: $cleanToken")
+
+            val claims = getAllClaims(cleanToken)
+
+            println("SUBJECT: ${claims.subject}")
+            println("EXPIRATION: ${claims.expiration}")
+
+            claims.subject
+
         } catch (e: Exception) {
+            println("JWT ERROR: ${e.message}")
+            e.printStackTrace()
             null
         }
     }

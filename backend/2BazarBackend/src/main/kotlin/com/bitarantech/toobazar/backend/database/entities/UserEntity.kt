@@ -1,5 +1,6 @@
 package com.bitarantech.toobazar.backend.database.entities
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -17,6 +18,7 @@ data class UserEntity(
 
     val family: String,
 
+    @Column(nullable = false, unique = true)
     val phone: String,
 
     val email: String,

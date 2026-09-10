@@ -7,12 +7,7 @@ import com.bitarantech.toobazar.backend.database.services.UserService
 import com.bitarantech.toobazar.backend.utils.error.ApiException
 import com.bitarantech.toobazar.backend.utils.error.Errors
 import com.bitarantech.toobazar.backend.utils.security.JwtService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -37,13 +32,56 @@ class UserController(
 
     @GetMapping("user")
     fun getUser(
-        @RequestParam("Authorization") token: String?,
-    ): Any {
-        return if (token.isNullOrEmpty()) {
+        @RequestHeader("Authorization") token: String?,
+    ): Any? {
+        if (token.isNullOrEmpty()) {
             throw ApiException(Errors.ERR_401_UNAUTHORIZED.MISSING_TOKEN)
-        }else{
-            ""
+        } else {
+            val phone = jwtService.extractPhone(token)
+            return if (phone.isNullOrEmpty()) {
+                throw ApiException(Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY)
+            } else {
+                service.findByPhone(phone)?.toResponse("")
+            }
         }
     }
 
 }
+
+/***
+// 1
+{
+"name": "آریا",
+"family": "نیک‌فر",
+"phone": "09121234567",
+"email": "arya.nikfar@example.com",
+"password": "Arya@123456"
+}
+
+// 2
+{
+"name": "سپیده",
+"family": "فرهمند",
+"phone": "09129876543",
+"email": "sepideh.farahmand@example.com",
+"password": "Sepideh@123456"
+}
+
+// 3
+{
+"name": "بردیا",
+"family": "دادگر",
+"phone": "09351234789",
+"email": "bardia.dadgar@example.com",
+"password": "Bardia@123456"
+}
+
+// 4
+{
+"name": "بهار",
+"family": "نیک‌نام",
+"phone": "09367894512",
+"email": "bahar.niknam@example.com",
+"password": "Bahar@123456"
+}
+ ***/
