@@ -1,24 +1,27 @@
-package com.bitarantech.toobazar.backend.utils.error
+package com.bitarantech.toobazar.backend.utils.response.error
 
+import com.bitarantech.toobazar.backend.utils.response.ApiResponseStatus
+import com.bitarantech.toobazar.backend.utils.response.ApiResponseBody
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 @RestControllerAdvice
-class ExceptionHandler {
+class GlobalExceptionHandler {
 
     @ExceptionHandler(ApiException::class)
     fun handleApiException(
         exception: ApiException
-    ): ResponseEntity<ErrorResponse> {
+    ): ResponseEntity<ApiResponseBody<Nothing>> {
 
         val error = exception.error
 
         return ResponseEntity
-            .status(error.status)
+            .status(error.httpStatus)
             .body(
-                ErrorResponse(
-                    status = error.status.value(),
+                ApiResponseBody(
+                    status = ApiResponseStatus.ERROR,
+                    httpStatus = error.httpStatus,
                     code = error.code,
                     message = error.message
                 )

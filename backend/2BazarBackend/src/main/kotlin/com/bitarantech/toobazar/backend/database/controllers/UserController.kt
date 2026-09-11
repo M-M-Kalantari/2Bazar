@@ -4,8 +4,10 @@ import com.bitarantech.toobazar.backend.database.dto_request.UserRequest
 import com.bitarantech.toobazar.backend.database.dto_request.toEntity
 import com.bitarantech.toobazar.backend.database.dto_response.toResponse
 import com.bitarantech.toobazar.backend.database.services.UserService
-import com.bitarantech.toobazar.backend.utils.error.ApiException
-import com.bitarantech.toobazar.backend.utils.error.Errors
+import com.bitarantech.toobazar.backend.utils.response.ApiResponse
+import com.bitarantech.toobazar.backend.utils.response.error.ApiException
+import com.bitarantech.toobazar.backend.utils.response.error.Errors
+import com.bitarantech.toobazar.backend.utils.response.success.Successes
 import com.bitarantech.toobazar.backend.utils.security.JwtService
 import org.springframework.web.bind.annotation.*
 
@@ -21,12 +23,15 @@ class UserController(
         @RequestBody user: UserRequest? = null
     ): Any {
         return if (user == null) {
-            throw ApiException(Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY)
+            ApiResponse.error(Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY)
         } else {
             val entity = user.toEntity()
             val token = jwtService.generate(entity)
             val savedUser = service.save(entity)
-            savedUser.toResponse(token)
+            ApiResponse.success(
+                Successes.SUC_201_CREATED.USER_CREATED,
+                savedUser.toResponse(token)
+            )
         }
     }
 
@@ -35,11 +40,11 @@ class UserController(
         @RequestHeader("Authorization") token: String?,
     ): Any? {
         if (token.isNullOrEmpty()) {
-            throw ApiException(Errors.ERR_401_UNAUTHORIZED.MISSING_TOKEN)
+            ApiResponse.error(Errors.ERR_401_UNAUTHORIZED.MISSING_TOKEN)
         } else {
             val phone = jwtService.extractPhone(token)
             return if (phone.isNullOrEmpty()) {
-                throw ApiException(Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY)
+                ApiResponse.error(Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY)
             } else {
                 service.findByPhone(phone)?.toResponse("")
             }

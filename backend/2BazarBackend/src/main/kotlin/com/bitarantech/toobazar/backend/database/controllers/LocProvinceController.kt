@@ -4,8 +4,8 @@ import com.bitarantech.toobazar.backend.database.dto_response.LocProvinceRespons
 import com.bitarantech.toobazar.backend.database.dto_response.toResponse
 import com.bitarantech.toobazar.backend.database.entities.LocProvinceEntity
 import com.bitarantech.toobazar.backend.database.services.LocProvinceService
-import com.bitarantech.toobazar.backend.utils.error.ApiException
-import com.bitarantech.toobazar.backend.utils.error.Errors
+import com.bitarantech.toobazar.backend.utils.response.error.ApiException
+import com.bitarantech.toobazar.backend.utils.response.error.Errors
 import org.springframework.web.bind.annotation.*
 
 @RestController

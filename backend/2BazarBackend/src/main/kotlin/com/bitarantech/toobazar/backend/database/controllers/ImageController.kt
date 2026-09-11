@@ -1,9 +1,8 @@
 package com.bitarantech.toobazar.backend.database.controllers
 
 import com.bitarantech.toobazar.backend.database.services.ImageService
-import com.bitarantech.toobazar.backend.utils.error.ApiException
-import com.bitarantech.toobazar.backend.utils.error.Errors
-import org.springframework.web.bind.annotation.GetMapping
+import com.bitarantech.toobazar.backend.utils.response.error.ApiException
+import com.bitarantech.toobazar.backend.utils.response.error.Errors
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam

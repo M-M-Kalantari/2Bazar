@@ -1,11 +1,9 @@
 package com.bitarantech.toobazar.backend.database.services
 
-import com.bitarantech.toobazar.backend.database.entities.CategoryEntity
 import com.bitarantech.toobazar.backend.database.entities.UserEntity
-import com.bitarantech.toobazar.backend.database.repositories.CategoryRepository
 import com.bitarantech.toobazar.backend.database.repositories.UserRepository
-import com.bitarantech.toobazar.backend.utils.error.ApiException
-import com.bitarantech.toobazar.backend.utils.error.Errors
+import com.bitarantech.toobazar.backend.utils.response.error.ApiException
+import com.bitarantech.toobazar.backend.utils.response.error.Errors
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
