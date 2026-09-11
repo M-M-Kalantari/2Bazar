@@ -57,6 +57,15 @@ object Successes {
             )
         )
 
+        val USER_RETRIEVED = ApiResponseInfo(
+            httpStatus = HttpStatus.OK,
+            code = "USER_RETRIEVED",
+            message = ApiResponseMessage(
+                fa = "کاربر با موفقیت دریافت شد.",
+                en = "User received successfully."
+            )
+        )
+
         val LOGIN_SUCCESS = ApiResponseInfo(
             httpStatus = HttpStatus.OK,
             code = "LOGIN_SUCCESS",

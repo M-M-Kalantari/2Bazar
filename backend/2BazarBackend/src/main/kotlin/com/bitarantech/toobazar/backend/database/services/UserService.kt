@@ -2,7 +2,7 @@ package com.bitarantech.toobazar.backend.database.services
 
 import com.bitarantech.toobazar.backend.database.entities.UserEntity
 import com.bitarantech.toobazar.backend.database.repositories.UserRepository
-import com.bitarantech.toobazar.backend.utils.response.error.ApiException
+import com.bitarantech.toobazar.backend.utils.response.ApiResponse
 import com.bitarantech.toobazar.backend.utils.response.error.Errors
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -15,7 +15,7 @@ class UserService(
 
     fun hashPassword(password: String): String = BCryptPasswordEncoder().encode(password)!!
 
-    fun save(entity: UserEntity): UserEntity {
+    fun create(entity: UserEntity): UserEntity {
         return try {
             repository.save(
                 entity.copy(
@@ -23,9 +23,15 @@ class UserService(
                 )
             )
         } catch (e: DataIntegrityViolationException) {
-            throw ApiException(
-                Errors.ERR_409_CONFLICT.PHONE_ALREADY_EXISTS
-            )
+            ApiResponse.error(Errors.ERR_409_CONFLICT.PHONE_ALREADY_EXISTS)
+        }
+    }
+
+    fun update(entity: UserEntity): UserEntity {
+        return try {
+            repository.save(entity)
+        } catch (e: DataIntegrityViolationException) {
+            ApiResponse.error(Errors.ERR_409_CONFLICT.PHONE_ALREADY_EXISTS)
         }
     }
 

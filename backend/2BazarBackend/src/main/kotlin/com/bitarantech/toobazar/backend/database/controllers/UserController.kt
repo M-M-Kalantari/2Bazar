@@ -5,7 +5,6 @@ import com.bitarantech.toobazar.backend.database.dto_request.toEntity
 import com.bitarantech.toobazar.backend.database.dto_response.toResponse
 import com.bitarantech.toobazar.backend.database.services.UserService
 import com.bitarantech.toobazar.backend.utils.response.ApiResponse
-import com.bitarantech.toobazar.backend.utils.response.error.ApiException
 import com.bitarantech.toobazar.backend.utils.response.error.Errors
 import com.bitarantech.toobazar.backend.utils.response.success.Successes
 import com.bitarantech.toobazar.backend.utils.security.JwtService
@@ -22,35 +21,75 @@ class UserController(
     fun addUser(
         @RequestBody user: UserRequest? = null
     ): Any {
-        return if (user == null) {
-            ApiResponse.error(Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY)
+        return user?.let {
+            service.findByPhone(it.phone)?.let {
+                ApiResponse.error(
+                    Errors.ERR_409_CONFLICT.USER_ALREADY_EXISTS
+                )
+            } ?: run {
+                val entity = it.toEntity()
+                val token = jwtService.generate(entity)
+                val savedUser = service.create(entity)
+
+                ApiResponse.success(
+                    Successes.SUC_201_CREATED.USER_CREATED,
+                    savedUser.toResponse(token)
+                )
+            }
+        } ?: ApiResponse.error(
+            Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY
+        )
+    }
+
+
+    @GetMapping("user")
+    fun getUser(
+        @RequestHeader("Authorization") token: String?
+    ): Any {
+        return if (token.isNullOrEmpty()) {
+            ApiResponse.error(
+                Errors.ERR_401_UNAUTHORIZED.MISSING_TOKEN
+            )
         } else {
-            val entity = user.toEntity()
-            val token = jwtService.generate(entity)
-            val savedUser = service.save(entity)
-            ApiResponse.success(
-                Successes.SUC_201_CREATED.USER_CREATED,
-                savedUser.toResponse(token)
+            jwtService.extractPhone(token)?.let { phone ->
+                service.findByPhone(phone)?.let { dbUser ->
+                    ApiResponse.success(
+                        Successes.SUC_200_OK.USER_RETRIEVED,
+                        dbUser.toResponse("")
+                    )
+                } ?: ApiResponse.error(
+                    Errors.ERR_404_NOT_FOUND.USER_NOT_FOUND
+                )
+            } ?: ApiResponse.error(
+                Errors.ERR_401_UNAUTHORIZED.INVALID_TOKEN
             )
         }
     }
 
-    @GetMapping("user")
-    fun getUser(
-        @RequestHeader("Authorization") token: String?,
-    ): Any? {
-        if (token.isNullOrEmpty()) {
-            ApiResponse.error(Errors.ERR_401_UNAUTHORIZED.MISSING_TOKEN)
-        } else {
-            val phone = jwtService.extractPhone(token)
-            return if (phone.isNullOrEmpty()) {
-                ApiResponse.error(Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY)
-            } else {
-                service.findByPhone(phone)?.toResponse("")
-            }
-        }
-    }
 
+    @PutMapping("user")
+    fun updateUser(
+        @RequestBody user: UserRequest? = null
+    ): Any {
+        return user?.let { request ->
+            service.findByPhone(request.phone)?.let { dbUser ->
+
+                val entity = request.toEntity()
+                val savedUser = service.update(entity.copy(id = dbUser.id))
+
+                ApiResponse.success(
+                    Successes.SUC_200_OK.USER_UPDATED,
+                    savedUser.toResponse("")
+                )
+
+            } ?: ApiResponse.error(
+                Errors.ERR_404_NOT_FOUND.USER_NOT_FOUND
+            )
+
+        } ?: ApiResponse.error(
+            Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY
+        )
+    }
 }
 
 /***
