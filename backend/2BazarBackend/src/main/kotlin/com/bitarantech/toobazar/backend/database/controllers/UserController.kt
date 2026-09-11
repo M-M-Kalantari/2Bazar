@@ -67,7 +67,7 @@ class UserController(
     }
 
 
-    @PutMapping("user")
+    @PutMapping("user1")
     fun updateUser(
         @RequestBody user: UserRequest? = null
     ): Any {
@@ -89,6 +89,43 @@ class UserController(
         } ?: ApiResponse.error(
             Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY
         )
+    }
+
+
+    @PutMapping("user")
+    fun updateUser(
+        @RequestHeader("Authorization") token: String?,
+        @RequestBody user: UserRequest? = null
+    ): Any {
+        return if (token.isNullOrEmpty()) {
+            ApiResponse.error(
+                Errors.ERR_401_UNAUTHORIZED.MISSING_TOKEN
+            )
+        } else {
+            jwtService.extractPhone(token)?.let { phone ->
+                service.findByPhone(phone)?.let { dbUser ->
+                    user?.let { request ->
+                        val entity = request.toEntity()
+
+                        val savedUser = service.update(
+                            entity.copy(id = dbUser.id)
+                        )
+
+                        ApiResponse.success(
+                            Successes.SUC_200_OK.USER_UPDATED,
+                            savedUser.toResponse("")
+                        )
+
+                    } ?: ApiResponse.error(
+                        Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY
+                    )
+                } ?: ApiResponse.error(
+                    Errors.ERR_404_NOT_FOUND.USER_NOT_FOUND
+                )
+            } ?: ApiResponse.error(
+                Errors.ERR_401_UNAUTHORIZED.INVALID_TOKEN
+            )
+        }
     }
 }
 
@@ -126,6 +163,15 @@ class UserController(
 "family": "نیک‌نام",
 "phone": "09367894512",
 "email": "bahar.niknam@example.com",
+"password": "Bahar@123456"
+}
+
+// 4 - updated
+{
+"name": "بهار",
+"family": "نیک‌نام",
+"phone": "09367894512",
+"email": "bahar21.niknam@example.com",
 "password": "Bahar@123456"
 }
  ***/
