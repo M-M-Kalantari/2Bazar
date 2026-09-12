@@ -21,6 +21,15 @@ object Successes {
             )
         )
 
+        val RETRIEVED = ApiResponseInfo(
+            httpStatus = HttpStatus.OK,
+            code = "RETRIEVED",
+            message = ApiResponseMessage(
+                fa = "داده با موفقیت دریافت شد.",
+                en = "The data received successfully."
+            )
+        )
+
         val UPDATED = ApiResponseInfo(
             httpStatus = HttpStatus.OK,
             code = "UPDATED",

@@ -5,6 +5,9 @@ import com.bitarantech.toobazar.backend.database.dto_response.LocProvinceRespons
 import com.bitarantech.toobazar.backend.database.dto_response.toResponse
 import com.bitarantech.toobazar.backend.database.entities.LocProvinceEntity
 import com.bitarantech.toobazar.backend.database.services.LocProvinceService
+import com.bitarantech.toobazar.backend.utils.response.ApiResponse
+import com.bitarantech.toobazar.backend.utils.response.success.Successes
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -18,6 +21,19 @@ class LocationController(
 ) {
 
     @GetMapping("location")
-    fun getProvinces(): List<LocProvinceResponse> = service.findAll().map { it.toResponse() }
+    fun getProvinces(
+        @RequestParam("includeCities") includeCities: Boolean? = true,
+        @RequestParam("includeNeighborhoods") includeNeighborhoods: Boolean? = true
+    ): ResponseEntity<*> {
+        return ApiResponse.success(
+            Successes.SUC_200_OK.RETRIEVED,
+            service.findAll().map {
+                it.toResponse(
+                    includeCities = includeCities ?: true,
+                    includeNeighborhoods = includeNeighborhoods ?: true
+                )
+            }
+        )
+    }
 
 }

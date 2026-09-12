@@ -8,10 +8,10 @@ data class LocProvinceResponse(
     val cities: List<LocCityResponse>? = null
 )
 
-fun LocProvinceEntity.toResponse(isFull: Boolean = true): LocProvinceResponse {
+fun LocProvinceEntity.toResponse(includeCities: Boolean = true, includeNeighborhoods: Boolean = true): LocProvinceResponse {
     return LocProvinceResponse(
         id = id,
         name = name,
-        cities = if (isFull) city.map { it.toResponse() } else null
+        cities = if (includeCities) city.map { it.toResponse(includeNeighborhoods = includeNeighborhoods) } else null
     )
 }

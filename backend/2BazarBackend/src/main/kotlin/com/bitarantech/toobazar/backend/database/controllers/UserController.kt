@@ -67,7 +67,7 @@ class UserController(
     }
 
 
-    @PutMapping("user1")
+    /**@PutMapping("user")
     fun updateUser(
         @RequestBody user: UserRequest? = null
     ): Any {
@@ -89,7 +89,7 @@ class UserController(
         } ?: ApiResponse.error(
             Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY
         )
-    }
+    }**/
 
 
     @PutMapping("user")
@@ -170,7 +170,7 @@ class UserController(
 {
 "name": "بهار",
 "family": "نیک‌نام",
-"phone": "09367894512",
+"phone": "09367894521",
 "email": "bahar21.niknam@example.com",
 "password": "Bahar@123456"
 }
