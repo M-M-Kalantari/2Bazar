@@ -6,17 +6,34 @@ import org.springframework.stereotype.Service
 
 @Service
 class ParameterService(
-    val repository: ParameterRepository
+    val repository: ParameterRepository,
+    private val categoryService: CategoryService
 ) {
 
     fun findAll(): List<ParameterEntity> = repository.findAll()
 
-    fun findByCategory(categoryId: Long): List<ParameterEntity> = repository.findAllByCategoryId(categoryId)
+    fun findByCategoryId(categoryId: Long): List<ParameterEntity> {
+        return repository.findAllByCategoryId(categoryId)
+    }
 
-    fun save(entity: ParameterEntity) : ParameterEntity = repository.save(entity)
+    fun findByCategoryIdWithParents(categoryId: Long): List<ParameterEntity>? {
+            val category = categoryService.findById(categoryId) ?: return null
 
-    fun saveAll(entityList: List<ParameterEntity>) : List<ParameterEntity?> = repository.saveAll(entityList)
+            val list = mutableListOf(categoryId)
+            var currentCategory = category
 
-    fun count() : Long = repository.count()
+            while (currentCategory.parent != null) {
+                currentCategory = currentCategory.parent!!
+                list.add(currentCategory.id)
+            }
+
+            return repository.findAllByCategoryIdIn(list)
+        }
+
+    fun save(entity: ParameterEntity): ParameterEntity = repository.save(entity)
+
+    fun saveAll(entityList: List<ParameterEntity>): List<ParameterEntity?> = repository.saveAll(entityList)
+
+    fun count(): Long = repository.count()
 
 }

@@ -260,6 +260,15 @@ object Errors {
                 en = "Neighborhood not found."
             )
         )
+
+        val CATEGORY_NOT_FOUND = ApiResponseInfo(
+            httpStatus = HttpStatus.NOT_FOUND,
+            code = "CATEGORY_NOT_FOUND",
+            message = ApiResponseMessage(
+                fa = "دسته بندی مورد نظر پیدا نشد.",
+                en = "Category not found."
+            )
+        )
     }
 
 

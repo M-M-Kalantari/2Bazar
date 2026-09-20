@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ParameterRepository : JpaRepository<ParameterEntity, Long> {
     fun findAllByCategoryId(categoryId: Long): List<ParameterEntity>
+    fun findAllByCategoryIdIn(categoryIds: List<Long>): List<ParameterEntity>
 }

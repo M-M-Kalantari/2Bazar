@@ -51,7 +51,7 @@ fun initParameters(context: ConfigurableApplicationContext) {
     val parameterService = context.getBean(ParameterService::class.java)
     val categoryService = context.getBean(CategoryService::class.java)
 
-    val list = ParameterDataProvider.getData(categoryService.findAll())
+    val list = ParameterDataProvider.getData(categoryService.findAllEntities())
 
     if (parameterService.count() < 1){
         parameterService.saveAll(list)

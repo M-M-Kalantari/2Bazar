@@ -1,17 +1,12 @@
 package com.bitarantech.toobazar.backend.database.controllers
 
-import com.bitarantech.toobazar.backend.database.dto_response.LocCityResponse
 import com.bitarantech.toobazar.backend.database.dto_response.toResponse
-import com.bitarantech.toobazar.backend.database.entities.LocProvinceEntity
-import com.bitarantech.toobazar.backend.database.services.LocCityService
 import com.bitarantech.toobazar.backend.database.services.ParameterService
 import com.bitarantech.toobazar.backend.utils.response.ApiResponse
-import com.bitarantech.toobazar.backend.utils.response.error.ApiException
 import com.bitarantech.toobazar.backend.utils.response.error.Errors
 import com.bitarantech.toobazar.backend.utils.response.success.Successes
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -26,15 +21,21 @@ class ParameterController(
     fun getParameters(
         @RequestParam(value = "categoryId") categoryId: Long? = null,
     ): ResponseEntity<*> {
-        return categoryId?.let { categoryId ->
+        return categoryId?.let {
+            service.findByCategoryIdWithParents(it)?.let { parameters ->
+                ApiResponse.success(
+                    Successes.SUC_200_OK.RETRIEVED,
+                    parameters.map { it.toResponse(includeCategories = false) }
+                )
+            } ?: ApiResponse.error(
+                Errors.ERR_404_NOT_FOUND.CATEGORY_NOT_FOUND
+            )
+        } ?: run {
             ApiResponse.success(
                 Successes.SUC_200_OK.RETRIEVED,
-                service.findByCategory(categoryId).map { it.toResponse(includeCategories = false) }
+                service.findAll().map { it.toResponse() }
             )
-        } ?: ApiResponse.success(
-            Successes.SUC_200_OK.RETRIEVED,
-            service.findAll().map { it.toResponse() }
-        )
+        }
     }
 
 }
