@@ -5,8 +5,10 @@ import com.bitarantech.toobazar.backend.database.services.CategoryService
 import com.bitarantech.toobazar.backend.database.services.LocCityService
 import com.bitarantech.toobazar.backend.database.services.LocNeighborhoodService
 import com.bitarantech.toobazar.backend.database.services.LocProvinceService
+import com.bitarantech.toobazar.backend.database.services.ParameterService
 import com.bitarantech.toobazar.backend.utils.provider.CategoryDataProvider
 import com.bitarantech.toobazar.backend.utils.provider.LocationDataProvider
+import com.bitarantech.toobazar.backend.utils.provider.ParameterDataProvider
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.ConfigurableApplicationContext
@@ -18,6 +20,7 @@ fun main(args: Array<String>) {
     val context = runApplication<Application>(*args)
     initLocations(context)
     initCategories(context)
+    initParameters(context)
 }
 
 fun initLocations(context: ConfigurableApplicationContext) {
@@ -41,5 +44,16 @@ fun initCategories(context: ConfigurableApplicationContext) {
 
     if (categoryService.count() < 1){
         categoryService.saveAll(list)
+    }
+}
+
+fun initParameters(context: ConfigurableApplicationContext) {
+    val parameterService = context.getBean(ParameterService::class.java)
+    val categoryService = context.getBean(CategoryService::class.java)
+
+    val list = ParameterDataProvider.getData(categoryService.findAll())
+
+    if (parameterService.count() < 1){
+        parameterService.saveAll(list)
     }
 }

@@ -1,6 +1,5 @@
 package com.bitarantech.toobazar.backend.database.entities
 
-import com.bitarantech.toobazar.backend.database.other.ParameterDataType
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -8,18 +7,22 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 
-@Entity(name = "parameters")
-data class ParameterEntity(
+@Entity(name = "parameters_value")
+data class ParameterValueEntity(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    val name: String,
+    val value: String,
 
-    val dataType: ParameterDataType,
+    @ManyToOne()
+    @JoinColumn(name = "ads_id", nullable = true)
+    val ads: AdsEntity,
 
-    val acceptedOptions: String? = null,
+    @ManyToOne()
+    @JoinColumn(name = "parameter_id", nullable = true)
+    val parameter: ParameterEntity,
 
     @ManyToOne()
     @JoinColumn(name = "category_id", nullable = true)
-    val category: CategoryEntity,
+    val category: CategoryEntity?,
 )
