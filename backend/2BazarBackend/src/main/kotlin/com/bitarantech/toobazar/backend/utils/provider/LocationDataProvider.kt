@@ -1,8 +1,8 @@
 package com.bitarantech.toobazar.backend.utils.provider
 
-import com.bitarantech.toobazar.backend.database.entities.LocCityEntity
-import com.bitarantech.toobazar.backend.database.entities.LocNeighborhoodEntity
-import com.bitarantech.toobazar.backend.database.entities.LocProvinceEntity
+import com.bitarantech.toobazar.backend.database.feature_based.location.entity.LocCityEntity
+import com.bitarantech.toobazar.backend.database.feature_based.location.entity.LocNeighborhoodEntity
+import com.bitarantech.toobazar.backend.database.feature_based.location.entity.LocProvinceEntity
 
 
 data class ProvinceData(

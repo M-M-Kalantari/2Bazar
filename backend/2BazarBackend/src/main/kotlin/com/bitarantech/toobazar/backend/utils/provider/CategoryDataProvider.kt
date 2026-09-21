@@ -1,6 +1,6 @@
 package com.bitarantech.toobazar.backend.utils.provider
 
-import com.bitarantech.toobazar.backend.database.entities.CategoryEntity
+import com.bitarantech.toobazar.backend.database.feature_based.category.CategoryEntity
 
 
 data class CategoryData(

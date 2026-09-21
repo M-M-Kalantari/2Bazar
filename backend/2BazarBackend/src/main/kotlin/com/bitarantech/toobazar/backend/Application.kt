@@ -1,6 +1,10 @@
 package com.bitarantech.toobazar.backend
 
-import com.bitarantech.toobazar.backend.database.services.*
+import com.bitarantech.toobazar.backend.database.feature_based.category.CategoryService
+import com.bitarantech.toobazar.backend.database.feature_based.location.service.LocCityService
+import com.bitarantech.toobazar.backend.database.feature_based.location.service.LocNeighborhoodService
+import com.bitarantech.toobazar.backend.database.feature_based.location.service.LocProvinceService
+import com.bitarantech.toobazar.backend.database.feature_based.parameter.ParameterService
 import com.bitarantech.toobazar.backend.utils.provider.CategoryDataProvider
 import com.bitarantech.toobazar.backend.utils.provider.LocationDataProvider
 import com.bitarantech.toobazar.backend.utils.provider.ParameterDataProvider

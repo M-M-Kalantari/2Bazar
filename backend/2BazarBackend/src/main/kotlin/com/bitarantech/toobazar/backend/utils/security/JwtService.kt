@@ -1,6 +1,6 @@
 package com.bitarantech.toobazar.backend.utils.security
 
-import com.bitarantech.toobazar.backend.database.entities.UserEntity
+import com.bitarantech.toobazar.backend.database.feature_based.user.UserEntity
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.io.Decoders

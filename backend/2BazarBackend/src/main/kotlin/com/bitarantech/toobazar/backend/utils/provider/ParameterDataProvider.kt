@@ -1,8 +1,8 @@
 package com.bitarantech.toobazar.backend.utils.provider
 
-import com.bitarantech.toobazar.backend.database.entities.CategoryEntity
-import com.bitarantech.toobazar.backend.database.entities.ParameterEntity
-import com.bitarantech.toobazar.backend.database.other.ParameterDataType
+import com.bitarantech.toobazar.backend.database.feature_based.category.CategoryEntity
+import com.bitarantech.toobazar.backend.database.feature_based.parameter.entity.ParameterEntity
+import com.bitarantech.toobazar.backend.database.feature_based.parameter.ParameterDataType
 
 object ParameterDataProvider {
 
