@@ -21,6 +21,13 @@ data class AdsEntity(
     @JoinColumn(name = "user_id")
     val user: UserEntity,
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne()
+    @JoinColumn(name = "category_id")
+    val category: CategoryEntity,
+
+    @OneToMany(mappedBy = "ads")
     val images: List<ImageEntity>,
+
+    @OneToMany(mappedBy = "parameter_value")
+    val parameterValue: List<ParameterValueEntity>,
 )

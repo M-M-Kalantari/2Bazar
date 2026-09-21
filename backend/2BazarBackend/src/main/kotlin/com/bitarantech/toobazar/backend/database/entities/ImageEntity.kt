@@ -1,9 +1,6 @@
 package com.bitarantech.toobazar.backend.database.entities
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import jakarta.persistence.*
 
 @Entity(name = "image")
 data class ImageEntity(
@@ -11,4 +8,8 @@ data class ImageEntity(
     val id: Long = 0,
 
     val path: String,
+
+    @ManyToOne
+    @JoinColumn(name = "ads_id")
+    val ads: AdsEntity
 )
