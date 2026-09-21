@@ -5,13 +5,7 @@ import com.bitarantech.toobazar.backend.database.feature_based.image.ImageEntity
 import com.bitarantech.toobazar.backend.database.feature_based.location.entity.LocNeighborhoodEntity
 import com.bitarantech.toobazar.backend.database.feature_based.parameter.entity.ParameterValueEntity
 import com.bitarantech.toobazar.backend.database.feature_based.user.UserEntity
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.OneToMany
+import jakarta.persistence.*
 
 @Entity(name = "ads")
 data class AdsEntity(
@@ -37,8 +31,8 @@ data class AdsEntity(
     val category: CategoryEntity,
 
     @OneToMany(mappedBy = "ads")
-    val images: List<ImageEntity>,
+    val images: List<ImageEntity> = listOf(),
 
-    @OneToMany(mappedBy = "parameter_value")
-    val parameterValue: List<ParameterValueEntity>,
+    @OneToMany(mappedBy = "ads")
+    val parameterValue: List<ParameterValueEntity> = listOf(),
 )

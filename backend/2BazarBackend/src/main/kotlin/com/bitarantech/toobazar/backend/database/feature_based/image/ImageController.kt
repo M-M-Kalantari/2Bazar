@@ -16,13 +16,12 @@ class ImageController(
 
     @PostMapping("upload")
     fun uploadImage(
-        @RequestParam("file")
-        file: MultipartFile? = null
+        @RequestParam("file") file: MultipartFile? = null
     ): String {
         return if (file == null) {
             throw ApiException(Errors.ERR_400_BAD_REQUEST.MISSING_REQUIRED_PARAMETER)
         } else {
-            val image = service.save(file)
+            val image = service.save(file, null)
             image.path
         }
     }

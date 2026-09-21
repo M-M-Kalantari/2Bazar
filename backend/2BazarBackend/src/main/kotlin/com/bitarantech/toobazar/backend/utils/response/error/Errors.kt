@@ -269,6 +269,15 @@ object Errors {
                 en = "Category not found."
             )
         )
+
+        val PARAMETER_NOT_FOUND = ApiResponseInfo(
+            httpStatus = HttpStatus.NOT_FOUND,
+            code = "PARAMETER_NOT_FOUND",
+            message = ApiResponseMessage(
+                fa = "مقدار مورد نظر پیدا نشد.",
+                en = "Parameter not found."
+            )
+        )
     }
 
 

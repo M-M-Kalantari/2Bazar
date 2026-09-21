@@ -4,7 +4,7 @@ import com.bitarantech.toobazar.backend.database.feature_based.category.Category
 import com.bitarantech.toobazar.backend.database.feature_based.location.service.LocCityService
 import com.bitarantech.toobazar.backend.database.feature_based.location.service.LocNeighborhoodService
 import com.bitarantech.toobazar.backend.database.feature_based.location.service.LocProvinceService
-import com.bitarantech.toobazar.backend.database.feature_based.parameter.ParameterService
+import com.bitarantech.toobazar.backend.database.feature_based.parameter.service.ParameterService
 import com.bitarantech.toobazar.backend.utils.provider.CategoryDataProvider
 import com.bitarantech.toobazar.backend.utils.provider.LocationDataProvider
 import com.bitarantech.toobazar.backend.utils.provider.ParameterDataProvider

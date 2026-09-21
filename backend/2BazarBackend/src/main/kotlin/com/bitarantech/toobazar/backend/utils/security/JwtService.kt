@@ -53,12 +53,12 @@ class JwtService {
 
         return try {
             val cleanToken = token.replace("Bearer ", "")
-            println("TOKEN: $cleanToken")
+//            println("TOKEN: $cleanToken")
 
             val claims = getAllClaims(cleanToken)
 
-            println("SUBJECT: ${claims.subject}")
-            println("EXPIRATION: ${claims.expiration}")
+//            println("SUBJECT: ${claims.subject}")
+//            println("EXPIRATION: ${claims.expiration}")
 
             claims.subject
 

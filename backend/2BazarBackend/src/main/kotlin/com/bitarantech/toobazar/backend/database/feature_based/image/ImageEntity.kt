@@ -12,5 +12,5 @@ data class ImageEntity(
 
     @ManyToOne
     @JoinColumn(name = "ads_id")
-    val ads: AdsEntity
+    val ads: AdsEntity?
 )

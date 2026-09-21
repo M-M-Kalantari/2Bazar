@@ -12,14 +12,10 @@ data class ParameterValueEntity(
     val value: String,
 
     @ManyToOne()
-    @JoinColumn(name = "ads_id", nullable = true)
+    @JoinColumn(name = "ads_id")
     val ads: AdsEntity,
 
     @ManyToOne()
-    @JoinColumn(name = "parameter_id", nullable = true)
+    @JoinColumn(name = "parameter_id")
     val parameter: ParameterEntity,
-
-    @ManyToOne()
-    @JoinColumn(name = "category_id", nullable = true)
-    val category: CategoryEntity?,
 )

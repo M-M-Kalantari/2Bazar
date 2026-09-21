@@ -118,6 +118,15 @@ object Successes {
                 en = "User created successfully."
             )
         )
+
+        val ADS_CREATED = ApiResponseInfo(
+            httpStatus = HttpStatus.CREATED,
+            code = "ADS_CREATED",
+            message = ApiResponseMessage(
+                fa = "تبلیغ با موفقیت ایجاد شد.",
+                en = "Ads created successfully."
+            )
+        )
     }
 
 

@@ -14,6 +14,14 @@ class CategoryService(
 
     fun findById(id: Long): CategoryEntity? = repository.findById(id).getOrNull()
 
+    fun getReferenceById(id: Long): CategoryEntity? {
+        return try {
+            repository.getReferenceById(id)
+        } catch (e: Exception){
+            null
+        }
+    }
+
     fun save(entity: CategoryEntity): CategoryEntity = repository.save(entity)
 
     fun saveAll(entityList: List<CategoryEntity>): List<CategoryEntity?> = repository.saveAll(entityList)

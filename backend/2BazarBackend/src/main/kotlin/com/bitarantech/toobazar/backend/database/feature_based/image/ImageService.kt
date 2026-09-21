@@ -1,5 +1,6 @@
 package com.bitarantech.toobazar.backend.database.feature_based.image
 
+import com.bitarantech.toobazar.backend.database.feature_based.ads.AdsEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
@@ -23,7 +24,7 @@ class ImageService(
         }
     }
 
-    fun save(file: MultipartFile): ImageEntity {
+    fun save(file: MultipartFile, ads: AdsEntity?): ImageEntity {
         val allowedTypes = setOf(
             "image/jpeg",
             "image/png",
@@ -52,9 +53,18 @@ class ImageService(
         }
 
         val image = ImageEntity(
-            path = filePath.toString()
+            path = filePath.toString(),
+            ads = ads
         )
 
         return repository.save(image)
+    }
+
+    fun saveAll(files: List<MultipartFile>, ads: AdsEntity): List<ImageEntity> {
+        val images: MutableList<ImageEntity> = mutableListOf()
+        files.forEach { file ->
+            images.add(save(file, ads))
+        }
+        return images
     }
 }

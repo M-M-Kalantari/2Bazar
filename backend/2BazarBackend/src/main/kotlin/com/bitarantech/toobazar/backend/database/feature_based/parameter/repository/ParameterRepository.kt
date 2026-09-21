@@ -1,4 +1,4 @@
-package com.bitarantech.toobazar.backend.database.feature_based.parameter
+package com.bitarantech.toobazar.backend.database.feature_based.parameter.repository
 
 import com.bitarantech.toobazar.backend.database.feature_based.parameter.entity.ParameterEntity
 import org.springframework.data.jpa.repository.JpaRepository

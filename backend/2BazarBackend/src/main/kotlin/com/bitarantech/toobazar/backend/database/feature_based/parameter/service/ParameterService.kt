@@ -1,6 +1,8 @@
-package com.bitarantech.toobazar.backend.database.feature_based.parameter
+package com.bitarantech.toobazar.backend.database.feature_based.parameter.service
 
 import com.bitarantech.toobazar.backend.database.feature_based.category.CategoryService
+import com.bitarantech.toobazar.backend.database.feature_based.location.entity.LocNeighborhoodEntity
+import com.bitarantech.toobazar.backend.database.feature_based.parameter.repository.ParameterRepository
 import com.bitarantech.toobazar.backend.database.feature_based.parameter.entity.ParameterEntity
 import org.springframework.stereotype.Service
 
@@ -26,6 +28,14 @@ class ParameterService(
         }
 
         return repository.findAllByCategoryIdIn(list)
+    }
+
+    fun getReferenceById(id: Long): ParameterEntity? {
+        return try {
+            repository.getReferenceById(id)
+        } catch (e: Exception){
+            null
+        }
     }
 
     fun save(entity: ParameterEntity): ParameterEntity = repository.save(entity)

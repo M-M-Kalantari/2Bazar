@@ -1,7 +1,8 @@
-package com.bitarantech.toobazar.backend.database.feature_based.parameter
+package com.bitarantech.toobazar.backend.database.feature_based.parameter.dto
 
 import com.bitarantech.toobazar.backend.database.feature_based.category.CategoryResponse
 import com.bitarantech.toobazar.backend.database.feature_based.category.toResponse
+import com.bitarantech.toobazar.backend.database.feature_based.parameter.ParameterDataType
 import com.bitarantech.toobazar.backend.database.feature_based.parameter.entity.ParameterEntity
 
 data class ParameterResponse(
