@@ -1,12 +1,7 @@
 package com.bitarantech.toobazar.backend.database.entities
 
 import com.bitarantech.toobazar.backend.database.other.ParameterDataType
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
+import jakarta.persistence.*
 
 @Entity(name = "parameters")
 data class ParameterEntity(

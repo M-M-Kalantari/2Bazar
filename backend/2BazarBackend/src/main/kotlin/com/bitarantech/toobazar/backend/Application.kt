@@ -1,11 +1,6 @@
 package com.bitarantech.toobazar.backend
 
-import com.bitarantech.toobazar.backend.database.entities.LocProvinceEntity
-import com.bitarantech.toobazar.backend.database.services.CategoryService
-import com.bitarantech.toobazar.backend.database.services.LocCityService
-import com.bitarantech.toobazar.backend.database.services.LocNeighborhoodService
-import com.bitarantech.toobazar.backend.database.services.LocProvinceService
-import com.bitarantech.toobazar.backend.database.services.ParameterService
+import com.bitarantech.toobazar.backend.database.services.*
 import com.bitarantech.toobazar.backend.utils.provider.CategoryDataProvider
 import com.bitarantech.toobazar.backend.utils.provider.LocationDataProvider
 import com.bitarantech.toobazar.backend.utils.provider.ParameterDataProvider
@@ -30,7 +25,7 @@ fun initLocations(context: ConfigurableApplicationContext) {
 
     val tripleList = LocationDataProvider.getData()
 
-    if (neighborhoodService.count() < 1){
+    if (neighborhoodService.count() < 1) {
         provinceService.saveAll(tripleList.first)
         cityService.saveAll(tripleList.second)
         neighborhoodService.saveAll(tripleList.third)
@@ -42,7 +37,7 @@ fun initCategories(context: ConfigurableApplicationContext) {
 
     val list = CategoryDataProvider.getData()
 
-    if (categoryService.count() < 1){
+    if (categoryService.count() < 1) {
         categoryService.saveAll(list)
     }
 }
@@ -53,7 +48,7 @@ fun initParameters(context: ConfigurableApplicationContext) {
 
     val list = ParameterDataProvider.getData(categoryService.findAllEntities())
 
-    if (parameterService.count() < 1){
+    if (parameterService.count() < 1) {
         parameterService.saveAll(list)
     }
 }

@@ -1,7 +1,7 @@
 package com.bitarantech.toobazar.backend.utils.response.success
 
-import com.bitarantech.toobazar.backend.utils.response.ApiResponseMessage
 import com.bitarantech.toobazar.backend.utils.response.ApiResponseInfo
+import com.bitarantech.toobazar.backend.utils.response.ApiResponseMessage
 import org.springframework.http.HttpStatus
 
 object Successes {

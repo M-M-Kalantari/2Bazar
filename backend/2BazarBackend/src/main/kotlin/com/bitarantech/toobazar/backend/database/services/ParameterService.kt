@@ -12,23 +12,21 @@ class ParameterService(
 
     fun findAll(): List<ParameterEntity> = repository.findAll()
 
-    fun findByCategoryId(categoryId: Long): List<ParameterEntity> {
-        return repository.findAllByCategoryId(categoryId)
-    }
+    fun findByCategoryId(categoryId: Long): List<ParameterEntity> = repository.findAllByCategoryId(categoryId)
 
     fun findByCategoryIdWithParents(categoryId: Long): List<ParameterEntity>? {
-            val category = categoryService.findById(categoryId) ?: return null
+        val category = categoryService.findById(categoryId) ?: return null
 
-            val list = mutableListOf(categoryId)
-            var currentCategory = category
+        val list = mutableListOf(categoryId)
+        var currentCategory = category
 
-            while (currentCategory.parent != null) {
-                currentCategory = currentCategory.parent!!
-                list.add(currentCategory.id)
-            }
-
-            return repository.findAllByCategoryIdIn(list)
+        while (currentCategory.parent != null) {
+            currentCategory = currentCategory.parent!!
+            list.add(currentCategory.id)
         }
+
+        return repository.findAllByCategoryIdIn(list)
+    }
 
     fun save(entity: ParameterEntity): ParameterEntity = repository.save(entity)
 

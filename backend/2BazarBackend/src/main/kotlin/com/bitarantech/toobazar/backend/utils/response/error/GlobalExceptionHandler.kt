@@ -1,7 +1,7 @@
 package com.bitarantech.toobazar.backend.utils.response.error
 
-import com.bitarantech.toobazar.backend.utils.response.ApiResponseStatus
 import com.bitarantech.toobazar.backend.utils.response.ApiResponseBody
+import com.bitarantech.toobazar.backend.utils.response.ApiResponseStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice

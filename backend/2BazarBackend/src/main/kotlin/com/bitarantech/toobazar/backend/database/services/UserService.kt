@@ -35,12 +35,8 @@ class UserService(
         }
     }
 
-    fun findByPhone(phone: String?): UserEntity? {
-        return repository.findByPhone(phone)
-    }
+    fun findByPhone(phone: String?): UserEntity? = repository.findByPhone(phone)
 
-    fun findByEmail(email: String?): UserEntity? {
-        return repository.findByEmail(email)
-    }
+    fun findByEmail(email: String?): UserEntity? = repository.findByEmail(email)
 
 }

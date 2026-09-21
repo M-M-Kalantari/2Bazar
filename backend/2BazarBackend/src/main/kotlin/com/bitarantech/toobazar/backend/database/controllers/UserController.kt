@@ -67,29 +67,29 @@ class UserController(
     }
 
 
-    /**@PutMapping("user")
-    fun updateUser(
-        @RequestBody user: UserRequest? = null
-    ): Any {
-        return user?.let { request ->
-            service.findByPhone(request.phone)?.let { dbUser ->
-
-                val entity = request.toEntity()
-                val savedUser = service.update(entity.copy(id = dbUser.id))
-
-                ApiResponse.success(
-                    Successes.SUC_200_OK.USER_UPDATED,
-                    savedUser.toResponse("")
-                )
-
-            } ?: ApiResponse.error(
-                Errors.ERR_404_NOT_FOUND.USER_NOT_FOUND
-            )
-
-        } ?: ApiResponse.error(
-            Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY
-        )
-    }**/
+//    @PutMapping("user")
+//    fun updateUser(
+//        @RequestBody user: UserRequest? = null
+//    ): Any {
+//        return user?.let { request ->
+//            service.findByPhone(request.phone)?.let { dbUser ->
+//
+//                val entity = request.toEntity()
+//                val savedUser = service.update(entity.copy(id = dbUser.id))
+//
+//                ApiResponse.success(
+//                    Successes.SUC_200_OK.USER_UPDATED,
+//                    savedUser.toResponse("")
+//                )
+//
+//            } ?: ApiResponse.error(
+//                Errors.ERR_404_NOT_FOUND.USER_NOT_FOUND
+//            )
+//
+//        } ?: ApiResponse.error(
+//            Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY
+//        )
+//    }
 
 
     @PutMapping("user")

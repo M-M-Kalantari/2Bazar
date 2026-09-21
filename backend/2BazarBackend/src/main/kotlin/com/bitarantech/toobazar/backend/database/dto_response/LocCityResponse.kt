@@ -1,7 +1,6 @@
 package com.bitarantech.toobazar.backend.database.dto_response
 
 import com.bitarantech.toobazar.backend.database.entities.LocCityEntity
-import com.bitarantech.toobazar.backend.database.entities.LocNeighborhoodEntity
 
 data class LocCityResponse(
     val id: Long,

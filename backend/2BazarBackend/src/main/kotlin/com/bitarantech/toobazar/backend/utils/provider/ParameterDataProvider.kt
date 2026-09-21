@@ -319,7 +319,7 @@ object ParameterDataProvider {
 
             parameters += createParameterEntity(
                 name = "طبقه",
-                parameterDataType = ParameterDataType.StringInput,
+                parameterDataType = ParameterDataType.NumberInput,
                 category = category
             )
 

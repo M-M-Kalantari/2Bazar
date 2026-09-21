@@ -1,10 +1,6 @@
 package com.bitarantech.toobazar.backend.database.entities
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.OneToMany
+import jakarta.persistence.*
 
 @Entity(name = "province")
 data class LocProvinceEntity(

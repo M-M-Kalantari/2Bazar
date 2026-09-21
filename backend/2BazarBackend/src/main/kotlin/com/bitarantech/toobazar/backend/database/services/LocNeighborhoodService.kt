@@ -11,10 +11,10 @@ class LocNeighborhoodService(
 
     fun findAll(): List<LocNeighborhoodEntity> = repository.findAll()
 
-    fun save(entity: LocNeighborhoodEntity) : LocNeighborhoodEntity = repository.save(entity)
+    fun save(entity: LocNeighborhoodEntity): LocNeighborhoodEntity = repository.save(entity)
 
-    fun saveAll(entityList: List<LocNeighborhoodEntity>) : List<LocNeighborhoodEntity?> = repository.saveAll(entityList)
+    fun saveAll(entityList: List<LocNeighborhoodEntity>): List<LocNeighborhoodEntity?> = repository.saveAll(entityList)
 
-    fun count() : Long = repository.count()
+    fun count(): Long = repository.count()
 
 }
