@@ -1,7 +1,5 @@
 package com.bitarantech.toobazar.backend.database.feature_based.category
 
-import com.bitarantech.toobazar.backend.database.feature_based.location.dto.toResponse
-
 data class CategoryResponse(
     val id: Long,
     val name: String,

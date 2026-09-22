@@ -6,6 +6,9 @@ import com.bitarantech.toobazar.backend.database.feature_based.location.entity.L
 import com.bitarantech.toobazar.backend.database.feature_based.parameter.entity.ParameterValueEntity
 import com.bitarantech.toobazar.backend.database.feature_based.user.UserEntity
 import jakarta.persistence.*
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
+import java.time.Instant
 
 @Entity(name = "ads")
 data class AdsEntity(
@@ -35,4 +38,10 @@ data class AdsEntity(
 
     @OneToMany(mappedBy = "ads")
     val parameterValue: List<ParameterValueEntity> = listOf(),
+
+    @CreationTimestamp
+    val created_at: Instant? = null,
+
+    @UpdateTimestamp
+    val updated_at: Instant? = null,
 )

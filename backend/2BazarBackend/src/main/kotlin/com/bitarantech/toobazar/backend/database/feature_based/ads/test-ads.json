@@ -1,0 +1,176 @@
+[
+  {
+    "title": "گوشی سامسونگ Galaxy S24",
+    "description": "گوشی کاملاً سالم با حافظه 256 گیگابایت",
+    "price": "45000000",
+    "locationId": 60,
+    "categoryId": 23,
+    "parameterValues": [
+      {
+        "value": "سبز",
+        "parameterId": 13
+      },
+      {
+        "value": "256GB",
+        "parameterId": 14
+      },
+      {
+        "value": "Android",
+        "parameterId": 26
+      },
+      {
+        "value": "4600",
+        "parameterId": 27
+      },
+      {
+        "value": "دو سیم‌کارت",
+        "parameterId": 28
+      }
+    ]
+  },
+  {
+    "title": "گوشی شیائومی Redmi Note 13 Pro",
+    "description": "گوشی کاملاً سالم با حافظه 512 گیگابایت و دوربین باکیفیت",
+    "price": "32000000",
+    "locationId": 60,
+    "categoryId": 23,
+    "parameterValues": [
+      {
+        "value": "آبی",
+        "parameterId": 13
+      },
+      {
+        "value": "512GB",
+        "parameterId": 14
+      },
+      {
+        "value": "Android",
+        "parameterId": 26
+      },
+      {
+        "value": "5100",
+        "parameterId": 27
+      },
+      {
+        "value": "دو سیم‌کارت",
+        "parameterId": 28
+      }
+    ]
+  },
+  {
+    "title": "گوشی اپل iPhone 15",
+    "description": "گوشی تمیز و بدون خط و خش با حافظه 128 گیگابایت",
+    "price": "58000000",
+    "locationId": 60,
+    "categoryId": 23,
+    "parameterValues": [
+      {
+        "value": "مشکی",
+        "parameterId": 13
+      },
+      {
+        "value": "128GB",
+        "parameterId": 14
+      },
+      {
+        "value": "iOS",
+        "parameterId": 26
+      },
+      {
+        "value": "3349",
+        "parameterId": 27
+      },
+      {
+        "value": "دو سیم‌کارت",
+        "parameterId": 28
+      }
+    ]
+  },
+  {
+    "title": "گوشی Apple iPhone Duo",
+    "description": "گوشی دوگانه اپل با طراحی تاشو، حافظه 512 گیگابایت و ظاهر بسیار تمیز",
+    "price": "95000000",
+    "locationId": 60,
+    "categoryId": 23,
+    "parameterValues": [
+      {
+        "value": "سفید",
+        "parameterId": 13
+      },
+      {
+        "value": "512GB",
+        "parameterId": 14
+      },
+      {
+        "value": "iOS",
+        "parameterId": 26
+      },
+      {
+        "value": "4800",
+        "parameterId": 27
+      },
+      {
+        "value": "دو سیم‌کارت",
+        "parameterId": 28
+      }
+    ]
+  },
+  {
+    "title": "گوشی سامسونگ Galaxy Z Fold8 Ultra",
+    "description": "گوشی تاشوی پرچمدار سامسونگ با نمایشگر بزرگ، طراحی باریک و حافظه 512 گیگابایت",
+    "price": "120000000",
+    "locationId": 60,
+    "categoryId": 23,
+    "parameterValues": [
+      {
+        "value": "مشکی",
+        "parameterId": 13
+      },
+      {
+        "value": "512GB",
+        "parameterId": 14
+      },
+      {
+        "value": "Android",
+        "parameterId": 26
+      },
+      {
+        "value": "5000",
+        "parameterId": 27
+      },
+      {
+        "value": "دو سیم‌کارت",
+        "parameterId": 28
+      }
+    ]
+  },
+  {
+    "title": "گوشی سامسونگ Galaxy Z TriFold",
+    "description": "گوشی سه‌تکه و دو بار تاشوی سامسونگ با نمایشگر 10 اینچی و حافظه 512 گیگابایت",
+    "price": "110000000",
+    "locationId": 60,
+    "categoryId": 23,
+    "parameterValues": [
+      {
+        "value": "مشکی",
+        "parameterId": 13
+      },
+      {
+        "value": "512GB",
+        "parameterId": 14
+      },
+      {
+        "value": "Android",
+        "parameterId": 26
+      },
+      {
+        "value": "5600",
+        "parameterId": 27
+      },
+      {
+        "value": "دو سیم‌کارت",
+        "parameterId": 28
+      }
+    ]
+  }
+]

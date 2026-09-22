@@ -13,32 +13,22 @@ import com.bitarantech.toobazar.backend.database.feature_based.user.dto.UserResp
 import com.bitarantech.toobazar.backend.database.feature_based.user.dto.toResponse
 import java.time.Instant
 
-data class AdsResponse(
-    val id: Long? = 0,
+data class AdsSummeryResponse(
+    val id: Long,
     val title: String,
-    val description: String,
     val price: String,
     val location: LocNeighborhoodResponse,
-    val user: UserResponse,
-    val category: CategoryResponse,
-    val image: List<ImageResponse>,
-    val parameterValues: List<ParameterValueResponse>,
-    val created_at: Instant?,
-    val updated_at: Instant?,
+    val previewImage: ImageResponse?,
+    val created_at: Instant? = null,
 )
 
-fun AdsEntity.toResponse(): AdsResponse {
-    return AdsResponse(
-        id = this.id,
-        title = this.title,
-        description = this.description,
-        price = this.price,
+fun AdsEntity.toSummeryResponse(): AdsSummeryResponse {
+    return AdsSummeryResponse(
+        id = id,
+        title = title,
+        price = price,
         location = location.toResponse(),
-        user = user.toResponse(""),
-        category = category.toResponse(false),
-        image = images.map { image -> image.toResponse() },
-        parameterValues = parameterValue.map { parameter -> parameter.toResponse() },
-        created_at = this.created_at,
-        updated_at = this.updated_at,
+        previewImage = images.firstOrNull()?.toResponse(),
+        created_at = created_at,
     )
 }

@@ -14,9 +14,13 @@ import com.bitarantech.toobazar.backend.utils.response.ApiResponse
 import com.bitarantech.toobazar.backend.utils.response.error.Errors
 import com.bitarantech.toobazar.backend.utils.response.success.Successes
 import com.bitarantech.toobazar.backend.utils.security.JwtService
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
+import kotlin.jvm.optionals.getOrNull
 
 @Service
 class AdsService(
@@ -30,7 +34,27 @@ class AdsService(
     val imageService: ImageService
 ) {
 
-    fun findAll(): List<AdsEntity> = repository.findAll()
+    fun findAll(page: Int = 0, pageSize: Int = 20): Page<AdsEntity> {
+        val pageRequest = PageRequest.of(
+            page,
+            pageSize,
+            Sort.by(Sort.Direction.DESC, "id")
+        )
+        return repository.findAll(pageRequest)
+    }
+
+    fun findAll(categoryId: Long, page: Int = 0, pageSize: Int = 20): Page<AdsEntity> {
+        val pageRequest = PageRequest.of(
+            page,
+            pageSize,
+            Sort.by(Sort.Direction.DESC, "id")
+        )
+        return repository.findAllByCategoryId(categoryId, pageRequest)
+    }
+
+    fun findById(id: Long): AdsEntity? {
+        return repository.findById(id).getOrNull()
+    }
 
     fun save(adsRequest: AdsRequest, token: String, images: List<MultipartFile>?): ResponseEntity<*> {
         return jwtService.extractPhone(token)?.let { phone ->

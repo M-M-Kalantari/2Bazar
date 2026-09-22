@@ -4,12 +4,12 @@ import com.bitarantech.toobazar.backend.database.feature_based.parameter.entity.
 
 data class ParameterValueResponse(
     val value: String,
-    val parameterResponse: ParameterResponse
+    val parameter: ParameterResponse
 )
 
 fun ParameterValueEntity.toResponse(): ParameterValueResponse {
     return ParameterValueResponse(
         value = value,
-        parameterResponse = parameter.toResponse()
+        parameter = parameter.toResponse(false)
     )
 }

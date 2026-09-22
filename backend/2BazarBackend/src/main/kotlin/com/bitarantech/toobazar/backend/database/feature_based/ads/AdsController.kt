@@ -1,6 +1,10 @@
 package com.bitarantech.toobazar.backend.database.feature_based.ads
 
 import com.bitarantech.toobazar.backend.database.feature_based.ads.dto.AdsRequest
+import com.bitarantech.toobazar.backend.database.feature_based.ads.dto.toResponse
+import com.bitarantech.toobazar.backend.database.feature_based.ads.dto.toSummeryResponse
+import com.bitarantech.toobazar.backend.utils.pageable.PageResponse
+import com.bitarantech.toobazar.backend.utils.pageable.toPageResponse
 import com.bitarantech.toobazar.backend.utils.response.ApiResponse
 import com.bitarantech.toobazar.backend.utils.response.error.Errors
 import com.bitarantech.toobazar.backend.utils.response.success.Successes
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
@@ -45,45 +50,39 @@ class AdsController(
 
 
     @GetMapping("ads")
-    fun getAds(): ResponseEntity<*> {
+    fun getAds(
+        @RequestParam("page", required = false) page: Int? = 0,
+        @RequestParam("pageSize", required = false) pageSize: Int? = 20,
+        @RequestParam("categoryId", required = false) categoryId: Long? = null,
+    ): ResponseEntity<*> {
+        val adsPage = if (categoryId == null) {
+            service.findAll(page ?: 0, pageSize ?: 20)
+        } else {
+            service.findAll(categoryId, page ?: 0, pageSize ?: 20)
+        }
+
         return ApiResponse.success(
             Successes.SUC_200_OK.RETRIEVED,
-            TODO()
+            adsPage.toPageResponse { it.toSummeryResponse() }
         )
     }
 
-}
+    @GetMapping("ads/detail")
+    fun getAdsDetail(
+        @RequestParam("id") adsId: Long?
+    ): ResponseEntity<*> {
 
-/***
-{
-"title": "گوشی سامسونگ Galaxy S24",
-"description": "گوشی کاملاً سالم با حافظه 256 گیگابایت",
-"price": "45000000",
-"locationId": 60,
-"categoryId": 23,
-"parameterValues": [
-{
-"value": "سبز",
-"parameterId": 13
-},
-{
-"value": "256GB",
-"parameterId": 14
-},
-{
-"value": "Android",
-"parameterId": 26
-},
-{
-"value": "4600",
-"parameterId": 27
-},
-{
-"value": "دو سیم‌کارت",
-"parameterId": 28
+        return adsId?.let { id ->
+            service.findById(id)?.let { ad ->
+                ApiResponse.success(
+                    Successes.SUC_200_OK.RETRIEVED,
+                    ad.toResponse()
+                )
+            } ?: ApiResponse.error(
+                Errors.ERR_404_NOT_FOUND.PRODUCT_NOT_FOUND
+            )
+        } ?: ApiResponse.error(
+            Errors.ERR_400_BAD_REQUEST.INVALID_REQUEST_BODY
+        )
+    }
 }
-]
-}
-
-{"title":"گوشی سامسونگ Galaxy S24","description":"گوشی کاملاً سالم با حافظه 256 گیگابایت","price":"45000000","locationId":60,"categoryId":23,"parameterValues":[{"value":"سبز","parameterId":13},{"value":"256GB","parameterId":14},{"value":"Android","parameterId":26},{"value":"4600","parameterId":27},{"value":"دو سیم‌کارت","parameterId":28}]}
-***/
