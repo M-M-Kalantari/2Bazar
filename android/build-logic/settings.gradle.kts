@@ -1,5 +1,4 @@
 pluginManagement {
-    includeBuild("build-logic")
     repositories {
 
         /**FOR-NO-INTERNET-ACCESS**/
@@ -30,7 +29,13 @@ dependencyResolutionManagement {
         maven { url = uri("https://jitpack.io") }
         mavenCentral()
     }
+
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
+    }
 }
 
-rootProject.name = "2BazarAndroid"
-include(":app")
+rootProject.name = "build-logic"
+include(":convention")
