@@ -34,3 +34,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "2BazarAndroid"
 include(":app")
+include(":data")
+include(":domain")
