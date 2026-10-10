@@ -5,8 +5,8 @@ plugins {
     id("convention.android.library")
     id("convention.android.hilt")
     id("convention.android.serialization")
-//    id("convention.android.room")
-//    id("androidx.room") version ("2.6.1")
+    id("convention.android.room")
+    id("androidx.room") version ("2.6.1")
 }
 
 android {
@@ -40,9 +40,9 @@ android {
 //    }
 }
 
-//room {
-//    schemaDirectory("$projectDir/schemas")
-//}
+room {
+    schemaDirectory("$projectDir/schemas")
+}
 
 dependencies {
 //    implementation(libs.androidx.core.ktx)
@@ -51,5 +51,6 @@ dependencies {
 //    testImplementation(libs.junit)
 //    androidTestImplementation(libs.androidx.junit)
 //    androidTestImplementation(libs.androidx.espresso.core)
-//    implementation(project(":utils"))
+
+    implementation(project(":core:utils"))
 }

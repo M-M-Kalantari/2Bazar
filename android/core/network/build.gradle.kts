@@ -46,9 +46,9 @@ dependencies {
 //    androidTestImplementation(libs.androidx.junit)
 //    androidTestImplementation(libs.androidx.espresso.core)
 
-//    implementation(project(":core:secure-shared-pref"))
-//
-//    implementation(libs.retrofit)
-//    implementation(libs.okhttp)
-//    implementation(libs.okhttp.logging)
+    implementation(project(":core:secure_shared_pref"))
+
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
 }
