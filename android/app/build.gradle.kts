@@ -63,4 +63,12 @@ dependencies {
 //    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 //    debugImplementation(libs.androidx.compose.ui.tooling)
 //    debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:network"))
+    implementation(project(":core:secure_shared_pref"))
+    implementation(project(":core:database"))
+    implementation(project(":core:utils"))
 }
