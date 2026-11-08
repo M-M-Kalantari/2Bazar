@@ -1,5 +1,14 @@
 # 2Bazar
 
+```
+██████╗ ██████╗   ██████╗  ███████╗  ██████╗  ██████╗
+    ██║ ██╔══██╗ ██╔═══██╗ ╚══███╔╝ ██╔═══██╗ ██╔══██╗
+██████║ ██████╔╝ ████████║   ███╔╝  ████████║ ██████╔╝
+██╔═══╝ ██╔══██╗ ██╔═══██║  ███╔╝   ██╔═══██║ ██╔══██╗
+██████╗ ██████╔╝ ██║   ██║ ███████╗ ██║   ██║ ██║  ██║
+╚═════╝ ╚═════╝  ╚═╝   ╚═╝ ╚══════╝ ╚═╝   ╚═╝ ╚═╝  ╚═╝
+```
+
 ### Second-Hand Marketplace Platform
 
 **2Bazar** is a full-stack second-hand marketplace platform inspired by classified advertising applications such as Divar.
