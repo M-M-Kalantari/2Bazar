@@ -3,40 +3,84 @@ package com.bitarantech.toobazar.data.utils
 import com.bitarantech.toobazar.domain.model.ApiError
 import com.bitarantech.toobazar.domain.model.DataResult
 import com.bitarantech.toobazar.domain.model.ServerError
-import com.bitarantech.toobazar.network.model.FailureResponse
-import com.bitarantech.toobazar.network.model.Status
-import com.bitarantech.toobazar.network.model.SuccessResponse
+import com.bitarantech.toobazar.network.model.ApiResponseBody
+import com.bitarantech.toobazar.network.model.ApiResponseStatus
+import kotlinx.coroutines.CancellationException
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
 import retrofit2.HttpException
 
-suspend fun <T> safeCall(execute: suspend () -> SuccessResponse<T>): DataResult<T> {
+suspend fun <T> safeCall(
+    execute: suspend () -> ApiResponseBody<T>
+): DataResult<T> {
+
     return try {
+
         val response = execute()
-        if (response.status == Status.Success) {
-            DataResult.Success(response.data!!, response.message)
+
+        if (response.status == ApiResponseStatus.SUCCESS) {
+
+            val data = response.data
+
+            if (data != null) {
+                DataResult.Success(
+                    data = data,
+                    message = response.message.fa
+                )
+            } else {
+                DataResult.Failure(
+                    ServerError(
+                        httpStatus = response.httpStatus,
+                        message = "داده‌ای از سرور دریافت نشد."
+                    )
+                )
+            }
+
         } else {
-            DataResult.Failure(ServerError(504))
+            DataResult.Failure(response.toApiError())
         }
-    } catch (e: Throwable) {
+
+    } catch (e: CancellationException) {
+        throw e
+
+    } catch (e: Exception) {
         DataResult.Failure(getApiError(e))
     }
 }
-
 fun getApiError(throwable: Throwable): ApiError {
+
     when (throwable) {
+
         is HttpException -> {
-            if (throwable.code() == 500) {
-                return ServerError(500, message = throwable.message())
+
+            val bodyError = throwable.response()
+                ?.errorBody()
+                ?.string()
+
+            if (!bodyError.isNullOrBlank()) {
+
+                val apiResponse = runCatching {
+                    Json.decodeFromString<ApiResponseBody<JsonElement?>>(
+                        bodyError
+                    )
+                }.getOrNull()
+
+                if (apiResponse != null) {
+                    return apiResponse.toApiError()
+                }
             }
-            val bodyError = throwable.response()?.errorBody().toString()
-            val failureResponse = Json.decodeFromString<FailureResponse>(bodyError)
-            return failureResponse.toApiError()
+
+            return ServerError(
+                httpStatus = throwable.code(),
+                message = throwable.message()
+            )
         }
 
         else -> {
             return object : ApiError {
-                override val httpStatus: Int = 598
-                override val message: String = throwable.message ?: "An unknown error occurred."
+                override val httpStatus = 598
+                override val message =
+                    throwable.message ?: "An unknown error occurred."
             }
         }
     }
