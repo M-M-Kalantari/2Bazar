@@ -2,10 +2,24 @@ pluginManagement {
     includeBuild("build-logic")
     repositories {
 
-        /**FOR-NO-INTERNET-ACCESS**/
-        maven { url = uri("https://maven.myket.ir") }
-        maven { url = uri("https://gradle.devneeds.ir/plugins") }
-        /**----------------------**/
+        /**FOR-NO-INTERNET-ACCESS-(Iranian-Mirrors)**/
+        maven("https://maven.myket.ir") {
+            name = "Myket"
+        }
+        maven("https://en-mirror.ir") {
+            name = "ENMirror"
+        }
+        maven("https://gradle.jamko.ir") {
+            name = "Jamko"
+        }
+        maven("https://maven.devneeds.ir") {
+            name = "DevNeeds"
+        }
+        maven("https://gradle.iranrepo.ir") {
+            name = "IranRepo"
+        }
+        /**----------------------------------------**/
+
         google {
             content {
                 includeGroupByRegex("com\\.android.*")
@@ -21,14 +35,28 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
 
-        /**FOR-NO-INTERNET-ACCESS**/
-        maven { url = uri("https://maven.myket.ir") }
-        maven { url = uri("https://gradle.devneeds.ir/public") }
-        /**----------------------**/
+        /**FOR-NO-INTERNET-ACCESS-(Iranian-Mirrors)**/
+        maven("https://maven.myket.ir") {
+            name = "Myket"
+        }
+        maven("https://en-mirror.ir") {
+            name = "ENMirror"
+        }
+        maven("https://gradle.jamko.ir") {
+            name = "Jamko"
+        }
+        maven("https://maven.devneeds.ir") {
+            name = "DevNeeds"
+        }
+        maven("https://gradle.iranrepo.ir") {
+            name = "IranRepo"
+        }
+        /**----------------------------------------**/
 
         google()
-        maven { url = uri("https://jitpack.io") }
         mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+
     }
 }
 
