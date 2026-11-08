@@ -1,23 +1,31 @@
 package com.bitarantech.toobazar.data.utils
 
 import com.bitarantech.toobazar.domain.model.*
-import com.bitarantech.toobazar.network.model.FailureResponse
+import com.bitarantech.toobazar.network.model.ApiResponseBody
 
-fun FailureResponse.toApiError(): ApiError {
-    return when (this.errorCode) {
-        404 -> NotFoundError(httpStatus = this.errorCode, message = this.message)
-        401 -> UnauthorizedError(httpStatus = this.errorCode, message = this.message)
-        403 -> ForbiddenError(httpStatus = this.errorCode, message = this.message)
-        400 -> BadRequestError(httpStatus = this.errorCode, message = this.message)
-        409 -> ConflictError(httpStatus = this.errorCode, message = this.message)
-        410 -> GoneError(httpStatus = this.errorCode, message = this.message)
-        415 -> UnsupportedMediaTypeError(httpStatus = this.errorCode, message = this.message)
-        429 -> TooManyRequestsError(httpStatus = this.errorCode, message = this.message)
-        503 -> ServiceUnavailableError(httpStatus = this.errorCode, message = this.message)
-        500 -> ServerError(httpStatus = this.errorCode, message = this.message)
+fun ApiResponseBody<*>.toApiError(): ApiError {
+
+    val errorMessage = message.fa.ifEmpty {
+        message.en.ifEmpty {
+            "An unknown error occurred."
+        }
+    }
+
+    return when (this.httpStatus) {
+        404 -> NotFoundError(httpStatus, errorMessage)
+        401 -> UnauthorizedError(httpStatus, errorMessage)
+        403 -> ForbiddenError(httpStatus, errorMessage)
+        400 -> BadRequestError(httpStatus, errorMessage)
+        409 -> ConflictError(httpStatus, errorMessage)
+        410 -> GoneError(httpStatus, errorMessage)
+        415 -> UnsupportedMediaTypeError(httpStatus, errorMessage)
+        429 -> TooManyRequestsError(httpStatus, errorMessage)
+        503 -> ServiceUnavailableError(httpStatus, errorMessage)
+        500 -> ServerError(httpStatus, errorMessage)
+
         else -> object : ApiError {
-            override val httpStatus: Int = this@toApiError.errorCode
-            override val message: String = this@toApiError.message.ifEmpty { "An unknown error occurred." }
+            override val httpStatus = this@toApiError.httpStatus
+            override val message = errorMessage
         }
     }
 }
